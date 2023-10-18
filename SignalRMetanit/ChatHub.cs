@@ -1,23 +1,19 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization; // для атрибута Authorize
+using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRApp
 {
+    [Authorize]
     public class ChatHub : Hub
     {
-        public async Task Send(string message)
+        public async Task Send(string message, string userName)
         {
-            await Clients.All.SendAsync("Receive", message, Context.ConnectionId, DateTime.Now.ToShortTimeString());
+            await Clients.All.SendAsync("Receive", message, userName);
         }
-
-        public override async Task OnConnectedAsync()
+        [Authorize(Roles = "admin")]
+        public async Task Notify(string message)
         {
-            await Clients.All.SendAsync("Notify", $"{Context.ConnectionId} вошел в чат");
-            await base.OnConnectedAsync();
-        }
-        public override async Task OnDisconnectedAsync(Exception? exception)
-        {
-            await Clients.All.SendAsync("Notify", $"{Context.ConnectionId} покинул в чат");
-            await base.OnDisconnectedAsync(exception);
+            await Clients.All.SendAsync("Receive", message, "Администратор");
         }
     }
 }
