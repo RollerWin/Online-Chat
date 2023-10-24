@@ -2,52 +2,54 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using SignalRApp;   // пространство имен класса ChatHub
-
-
-var adminRole = new Role("admin");
-var userRole = new Role("user");
-var people = new List<Person>
-{
-    new Person("tom@gmail.com", "12345", adminRole),
-    new Person("bob@gmail.com", "55555", userRole),
-};
+using SignalRApp; // пространство имен класса ChatHub
+using Microsoft.EntityFrameworkCore;
+using SignalRMetanit;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<OnlineChatContext>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => options.LoginPath = "/login");
+    .AddCookie(options => options.LoginPath = "/register");
 builder.Services.AddAuthorization();
 
 builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-app.UseAuthentication();   // добавление middleware аутентификации 
-app.UseAuthorization();   // добавление middleware авторизации 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<OnlineChatContext>();
+
+    var adminRole = context.Users.FirstOrDefault(u => u.Role == "admin");
+    var userRole = context.Users.FirstOrDefault(u => u.Role == "user");
+    var people = context.Users.ToList();
+}
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapGet("/login", async context =>
     await SendHtmlAsync(context, "wwwroot/login.html"));
 
 app.MapPost("/login", async (string? returnUrl, HttpContext context) =>
 {
-    // получаем из формы email и пароль
     var form = context.Request.Form;
-    // если email и/или пароль не установлены, посылаем статусный код ошибки 400
-    if (!form.ContainsKey("email") || !form.ContainsKey("password"))
-        return Results.BadRequest("Email и/или пароль не установлены");
-    string email = form["email"];
+    if (!form.ContainsKey("name") || !form.ContainsKey("password"))
+        return Results.BadRequest("Имя и/или пароль не установлены");
+    string name = form["name"];
     string password = form["password"];
 
-    // находим пользователя 
-    Person? person = people.FirstOrDefault(p => p.Email == email && p.Password == password);
-    // если пользователь не найден, отправляем статусный код 401
+    var dbContext = context.RequestServices.GetRequiredService<OnlineChatContext>();
+    User? person = dbContext.Users.FirstOrDefault(u => u.Name == name && u.Password == password);
     if (person is null) return Results.Unauthorized();
 
     var claims = new List<Claim>
     {
-        new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email),
-        new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Role.Name)
+        new Claim(ClaimsIdentity.DefaultNameClaimType, person.Name),
+        new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Role)
     };
     var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
@@ -55,19 +57,44 @@ app.MapPost("/login", async (string? returnUrl, HttpContext context) =>
     return Results.Redirect(returnUrl ?? "/");
 });
 
+app.MapGet("/register", async context =>
+    await SendHtmlAsync(context, "wwwroot/register.html"));
+
+app.MapPost("/register", async (string? returnUrl, HttpContext context) =>
+{
+    var form = context.Request.Form;
+    if (!form.ContainsKey("name") || !form.ContainsKey("password"))
+        return Results.BadRequest("Имя и/или пароль не установлены");
+    string name = form["name"];
+    string password = form["password"];
+
+    // Создайте нового пользователя с ролью "user"
+    var newUser = new User
+    {
+        Name = name,
+        Password = password,
+        Role = "user"
+    };
+
+    var dbContext = context.RequestServices.GetRequiredService<OnlineChatContext>();
+    dbContext.Users.Add(newUser);
+    await dbContext.SaveChangesAsync();
+
+    return Results.Redirect("/login");
+});
+
+
 app.MapGet("/", [Authorize] async (HttpContext context) =>
     await SendHtmlAsync(context, "wwwroot/index.html"));
 
 app.MapGet("/admin", [Authorize(Roles = "admin")] async (HttpContext context) =>
     await SendHtmlAsync(context, "wwwroot/admin.html"));
 
-
 app.MapGet("/logout", async (HttpContext context) =>
 {
     await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     return Results.Redirect("/login");
 });
-
 
 app.MapHub<ChatHub>("/chat");
 app.Run();
@@ -77,5 +104,3 @@ async Task SendHtmlAsync(HttpContext context, string path)
     context.Response.ContentType = "text/html; charset=utf-8";
     await context.Response.SendFileAsync(path);
 }
-record class Person(string Email, string Password, Role Role);
-record class Role(string Name);

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8IbOPASiX2wI6Ie7ontsqrjEsAgUfYKPcYcnR2HliC8=",
+  "Hash": "SWqpf/138eZeCOsvc5QKnA6t9f3AlXgbvIct71XlGfY=",
   "Source": "SignalRMetanit",
   "BasePath": "_content/SignalRMetanit",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\login.html"
+    },
+    {
+      "Identity": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\register.html",
+      "SourceId": "SignalRMetanit",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\",
+      "BasePath": "_content/SignalRMetanit",
+      "RelativePath": "register.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\register.html"
     }
   ]
 }
