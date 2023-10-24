@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P9p3M1YSG0unPCyvDnZZjABhfy5Jw72xen+kf5Kh0T/OgTLn4cS3pWLUQRUFpFgEeP8BL1Y7EVlUA8Cpyssiwg==",
+  "dgSpecHash": "4Oh5PcpgnYYysFbVQmXdTj59FNpMELyKLE1245rbPE9DYGGMg4b/xJ+CploKjYT2ICrcbE3bFdKY5LvJzdhUyg==",
   "success": true,
-  "projectFilePath": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\SignalRMetanit.csproj",
+  "projectFilePath": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\SignalRMetanit.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ринат\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Ринат\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",

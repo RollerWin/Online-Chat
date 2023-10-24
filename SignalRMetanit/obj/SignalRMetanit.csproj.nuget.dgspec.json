@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\SignalRMetanit.csproj": {}
+    "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\SignalRMetanit.csproj": {}
   },
   "projects": {
-    "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\SignalRMetanit.csproj": {
+    "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\SignalRMetanit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\SignalRMetanit.csproj",
+        "projectUniqueName": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\SignalRMetanit.csproj",
         "projectName": "SignalRMetanit",
-        "projectPath": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\SignalRMetanit.csproj",
+        "projectPath": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\SignalRMetanit.csproj",
         "packagesPath": "C:\\Users\\Ринат\\.nuget\\packages\\",
-        "outputPath": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\obj\\",
+        "outputPath": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ринат\\AppData\\Roaming\\NuGet\\NuGet.Config",

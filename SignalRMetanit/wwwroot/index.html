@@ -7,11 +7,10 @@
 <body>
     <h2>Личный кабинет пользователя</h2>
     <p><a href="logout">Выйти</a></p>
-    <div id="userForm">
-        <p>
-            Введите ник:<br />
-            <input id="username" type="text" />
-        </p>
+
+    <div id="chatroom"></div>
+
+    <div id="messageForm">
         <p>
             Введите сообщение:<br />
             <input type="text" id="message" />
@@ -19,34 +18,27 @@
         <input type="button" id="sendBtn" value="Отправить" />
     </div>
 
-    <div id="chatroom"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script>
         const hubConnection = new signalR.HubConnectionBuilder()
             .withUrl("/chat")
             .build();
 
-        // отправка сообщения от простого пользователя
+        // отправка сообщения от пользователя
         document.getElementById("sendBtn").addEventListener("click", () => {
             const message = document.getElementById("message").value;
-            const username = document.getElementById("username").value;
-            hubConnection.invoke("Send", message, username)
+            hubConnection.invoke("Send", message)
                 .catch(error => console.error(error));
         });
         // получение сообщения от сервера
         hubConnection.on("Receive", (message, userName) => {
 
-            // создаем элемент <b> для имени пользователя
-            const userNameElem = document.createElement("b");
-            userNameElem.textContent = `${userName}: `;
-
             // создает элемент <p> для сообщения пользователя
             const elem = document.createElement("p");
-            elem.appendChild(userNameElem);
-            elem.appendChild(document.createTextNode(message));
+            elem.textContent = `${userName}: ${message}`;
 
-            var firstElem = document.getElementById("chatroom").firstChild;
-            document.getElementById("chatroom").insertBefore(elem, firstElem);
+            var chatroom = document.getElementById("chatroom");
+            chatroom.appendChild(elem);
         });
 
         hubConnection.start()

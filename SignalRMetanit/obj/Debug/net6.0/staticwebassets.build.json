@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SWqpf/138eZeCOsvc5QKnA6t9f3AlXgbvIct71XlGfY=",
+  "Hash": "Y2gzWXHMY+Dw+ZsmEoHHAixTA1EXikil0eBpj+fBI7k=",
   "Source": "SignalRMetanit",
   "BasePath": "_content/SignalRMetanit",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SignalRMetanit\\wwwroot",
       "Source": "SignalRMetanit",
-      "ContentRoot": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
       "BasePath": "_content/SignalRMetanit",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\admin.html",
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\admin.html",
       "SourceId": "SignalRMetanit",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
       "BasePath": "_content/SignalRMetanit",
       "RelativePath": "admin.html",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\admin.html"
     },
     {
-      "Identity": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\index.html",
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\index.html",
       "SourceId": "SignalRMetanit",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
       "BasePath": "_content/SignalRMetanit",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\login.html",
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\login.html",
       "SourceId": "SignalRMetanit",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
       "BasePath": "_content/SignalRMetanit",
       "RelativePath": "login.html",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\login.html"
     },
     {
-      "Identity": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\register.html",
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\register.html",
       "SourceId": "SignalRMetanit",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
       "BasePath": "_content/SignalRMetanit",
       "RelativePath": "register.html",
       "AssetKind": "All",

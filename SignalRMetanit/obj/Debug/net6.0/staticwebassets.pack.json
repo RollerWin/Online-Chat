@@ -1,19 +1,19 @@
 {
   "Files": [
     {
-      "Id": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\admin.html",
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\admin.html",
       "PackagePath": "staticwebassets\\admin.html"
     },
     {
-      "Id": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\index.html",
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\login.html",
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\login.html",
       "PackagePath": "staticwebassets\\login.html"
     },
     {
-      "Id": "D:\\Soft\\учёба\\Web\\SignalRMetanit\\SignalRMetanit\\wwwroot\\register.html",
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\register.html",
       "PackagePath": "staticwebassets\\register.html"
     },
     {
