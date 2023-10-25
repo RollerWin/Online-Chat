@@ -12,6 +12,23 @@ namespace SignalRApp
             var timestamp = DateTime.Now.ToString("HH:mm:ss"); // Получаем текущее время
             await Clients.All.SendAsync("Receive", message, userName, timestamp);
         }
+
+        public async Task JoinGroup(string groupName)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+
+            var userName = Context.User.Identity.Name;
+            var groupJoinMessage = $"{userName} присоединился к группе \"{groupName}\"";
+            await Clients.Group(groupName).SendAsync("GroupJoinNotification", groupJoinMessage);
+        }
+
+        public async Task SendGroupMessage(string groupName, string message)
+        {
+            var userName = Context.User.Identity.Name;
+            var timestamp = DateTime.Now.ToString("HH:mm:ss");
+            await Clients.Group(groupName).SendAsync("Receive", message, userName, timestamp);
+        }
+
         [Authorize(Roles = "admin")]
         public async Task Notify(string message)
         {

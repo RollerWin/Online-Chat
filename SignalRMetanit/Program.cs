@@ -23,8 +23,8 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<OnlineChatContext>();
 
-    var adminRole = context.Users.FirstOrDefault(u => u.Role == "admin");
-    var userRole = context.Users.FirstOrDefault(u => u.Role == "user");
+    //var adminRole = context.Users.FirstOrDefault(u => u.Role == "admin");
+    //var userRole = context.Users.FirstOrDefault(u => u.Role == "user");
     var people = context.Users.ToList();
 }
 
