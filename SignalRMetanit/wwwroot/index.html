@@ -31,11 +31,26 @@
                 .catch(error => console.error(error));
         });
         // получение сообщения от сервера
-        hubConnection.on("Receive", (message, userName) => {
+        hubConnection.on("Receive", (message, userName, timestamp) => {
 
             // создает элемент <p> для сообщения пользователя
             const elem = document.createElement("p");
-            elem.textContent = `${userName}: ${message}`;
+            const br = document.createElement("br");
+
+            const timestampElem = document.createElement("span");
+            timestampElem.textContent = `${timestamp}\n`;
+
+            const userNameElem = document.createElement("span");
+            userNameElem.textContent = `${userName} - `;
+
+            const userMessageElem = document.createElement("span");
+            userMessageElem.textContent = message;
+
+            elem.appendChild(timestampElem);
+            elem.appendChild(br);
+            elem.appendChild(userNameElem);
+            elem.appendChild(userMessageElem);
+            elem.appendChild(br);
 
             var chatroom = document.getElementById("chatroom");
             chatroom.appendChild(elem);
