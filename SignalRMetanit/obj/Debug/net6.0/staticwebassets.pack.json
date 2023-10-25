@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\Images\\arrow.png",
+      "PackagePath": "staticwebassets\\Images\\arrow.png"
+    },
+    {
       "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\admin.html",
       "PackagePath": "staticwebassets\\admin.html"
     },
@@ -15,6 +19,10 @@
     {
       "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\register.html",
       "PackagePath": "staticwebassets\\register.html"
+    },
+    {
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\АНКЕТА.jpg",
+      "PackagePath": "staticwebassets\\АНКЕТА.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.SignalRMetanit.Microsoft.AspNetCore.StaticWebAssets.props",

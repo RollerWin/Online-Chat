@@ -1,0 +1,133 @@
+﻿body {
+    background-color: #4db6ac;
+    font-family: Arial;
+}
+
+.incoming-message, .outgoing-message {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.outgoing-message {
+    background-color: #e0f7fa;
+}
+
+.input-container {
+    display: flex;
+}
+
+.custom-input {
+    width: 50%;
+    flex: 1;
+    border-radius: 15px;
+    height: 50px;
+    border: 1px solid #ccc;
+    max-width: 405px;
+}
+
+#sendBtn {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+#table_container {
+    border-radius: 15px;
+    padding: 20px;
+}
+
+#container {
+    width: 90%;
+    max-width: 1000px;
+    margin-left: 300px;
+    display: grid;
+    border-radius: 15px;
+    border: 15px solid #fff;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    background-color: white;
+}
+
+#left-side {
+    border-right: 1px solid #ccc;
+    width: 500px;
+}
+
+#chatroom {
+    width: 90%;
+    max-width: 650px;
+    height: 500px;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    overflow: auto;
+    padding: 10px;
+    justify-content: center;
+}
+
+#right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+}
+
+#groupInfo {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #4db6ac;
+    color: white;
+    max-width: 400px;
+}
+
+#group {
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    height: 20px;
+}
+
+#joinBtn {
+    background-color: white;
+    border-radius: 15px;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+
+#groupMessage {
+    border-radius: 15px;
+    height: 20px;
+    border: 1px solid #ccc;
+}
+
+#sendGroupBtn {
+    background-color: white;
+    border-radius: 15px;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+
+#groupSendMessage {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: #4db6ac;
+    color: white;
+    max-width: 400px;
+}
+
+#Exit {
+    text-decoration: none;
+    color: white;
+}
+
+#ExitContainer {
+    background-color: #4db6ac;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    height: 40px;
+    width: 60px;
+    text-align: center;
+}

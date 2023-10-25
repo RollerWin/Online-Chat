@@ -3,21 +3,43 @@
 <head>
     <meta charset="utf-8" />
     <title>Страница входа</title>
+    <style>
+        body {
+            background-color: #4db6ac;
+            font-family: Arial;
+            color: white;
+        }
+
+        #login {
+            border-radius: 15px;
+            backgroud-color: white;
+            border: 15px solid #fff;
+
+        }
+
+        a{
+            text-decoration: none;
+            color:white;
+        }
+
+    </style>
 </head>
 <body>
     <h2>Вход в приложение</h2>
-    <form method="post">
-        <p>
-            <label>Name</label><br />
-            <input name="name" />
-        </p>
-        <p>
-            <label>Password</label><br />
-            <input type="password" name="password" />
-        </p>
-        <input type="submit" value="Login" />
-    </form>
+    <div id="login">
+        <form method="post">
+            <p>
+                <label>Имя</label><br />
+                <input name="name" />
+            </p>
+            <p>
+                <label>Пароль</label><br />
+                <input type="password" name="password" />
+            </p>
+            <input type="submit" value="Login" />
+        </form>
 
-    <p>Еще нет аккаунта? <a href="register">Зарегистрируйтесь</a></p>
+        <p>Еще нет аккаунта? <a href="register" >Зарегистрируйтесь</a></p>
+    </div>
 </body>
 </html>

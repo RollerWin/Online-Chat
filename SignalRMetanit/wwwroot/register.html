@@ -3,21 +3,42 @@
 <head>
     <meta charset="utf-8" />
     <title>Страница регистрации</title>
+
+    <style>
+        body {
+            background-color: #4db6ac;
+            font-family: Arial;
+            color: white;
+        }
+
+        #register {
+            border-radius: 15px;
+            backgroud-color: white;
+            border: 15px solid #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <h2>Регистрация</h2>
-    <form method="post" action="/register">
-        <p>
-            <label>Имя</label><br />
-            <input name="name" />
-        </p>
-        <p>
-            <label>Password</label><br />
-            <input type="password" name="password" />
-        </p>
-        <input type="submit" value="Register" />
-    </form>
+    <div id="register">
+        <form method="post" action="/register" border-radius: 15px>
+            <p>
+                <label>Имя</label><br />
+                <input name="name" />
+            </p>
+            <p>
+                <label>Пароль</label><br />
+                <input type="password" name="password" />
+            </p>
+            <input type="submit" value="Register" />
+        </form>
 
-    <p>Уже есть аккаунт? <a href="login">Войдите</a></p>
+        <p>Уже есть аккаунт? <a href="login">Войдите</a></p>
+    </div>
 </body>
 </html>

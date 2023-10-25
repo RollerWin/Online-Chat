@@ -5,25 +5,17 @@
     <title>Онлайн-чатик</title>
 
     <style>
-        /* Стили для контейнера сообщений */
-        #chatroom {
-            width: 90%; /* Ширина будет занимать 90% доступной ширины */
-            max-width: 600px; /* Но не превышать 500px */
-            height: 500px;
-            border: 1px solid #ccc;
-            border-radius: 15px; /* Закругления для коробки сообщений */
-            overflow: auto;
-            padding: 10px;
-            justify-content:center;
+        body {
+            background-color: #4db6ac;
+            font-family:Arial;
         }
-
-        /* Стили для отдельных сообщений */
+        
         .incoming-message, .outgoing-message {
             padding: 5px;
             margin: 5px;
             border: 1px solid #ddd;
             background-color: #f9f9f9;
-            border-radius: 5px; /* Закругления для сообщений */
+            border-radius: 5px;
         }
 
         .outgoing-message {
@@ -35,72 +27,173 @@
         }
 
         .custom-input {
+            width: 50%;
             flex: 1;
             border-radius: 15px;
             height: 50px;
-            max-width: 500px;
+            border: 1px solid #ccc;
+            max-width: 405px;
         }
 
         #sendBtn {
-            margin-left: 10px; /* Добавляем небольшой отступ между вводимым сообщением и кнопкой "Отправить" */
+            margin-left: 10px;
             width: 50px;
             height: 50px;
         }
 
+        #table_container {
+            border-radius: 15px;
+            padding: 20px;
+        }
+
         #container {
-            width: 100%;
-            max-width: 2000px;
-            margin-left: 350px;
+            width: 90%;
+            max-width: 1000px;
+            margin-left: 300px;
             display: grid;
+            border-radius: 15px;
+            border: 15px solid #fff;
             grid-template-columns: 1fr 2fr;
             justify-content: center;
+            background-color: white;
         }
 
         #left-side {
             border-right: 1px solid #ccc;
+            width:500px;
+        }
+
+        #chatroom {
+            width: 90%;
+            max-width: 650px;
+            height: 500px;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            overflow: auto;
+            padding: 10px;
+            justify-content: center;
         }
 
         #right-side {
-            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            padding: 40px;
         }
 
+        #right-side > * {
+            margin-bottom: 20px; /* Примерный отступ по вертикали между элементами */
+        }
+
+        #groupInfo {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            background-color: #4db6ac;
+            color: white;
+            max-width: 400px;
+
+        }
+
+        #group {
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            height: 30px;
+        }
+
+        #joinBtn {
+            background-color: white;
+            border-radius: 15px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        #groupMessage {
+            border-radius: 15px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        #sendGroupBtn {
+            background-color: white;
+            border-radius: 15px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        #groupSendMessage {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            background-color: #4db6ac;
+            color:white;
+            max-width: 400px;
+        }
+
+        #Exit {
+            text-decoration: none;
+            color: white;
+        }
+
+        #ExitContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #4db6ac;
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            height: 40px;
+            width: 60px;
+            text-align: center;
+        }
 
     </style>
 </head>
 <body>
-    <h2>Личный кабинет пользователя</h2>
-    <p><a href="logout">Выйти</a></p>
+    <h2 align="center" color=white>Online-Chat</h2>
 
-    <div id="container">
-        <div id="left-side">
-            <div id="chatroom"></div>
-            <div id="messageForm">
-                <div class="input-container">
-                    <input type="text" id="message" placeholder="Введите сообщение..." class="custom-input" />
-                    <!--<input type="button" id="sendBtn" value="Отправить" />-->
-                    <img src="arrow.png" alt="Отправить" id="sendBtn" />
+    <div id="table_container">
+        <div id="container">
+            <div id="left-side">
+                <div id="chatroom"></div>
+                <div id="messageForm">
+                    <div class="input-container">
+                        <input type="text" id="message" placeholder="Введите сообщение..." class="custom-input" />
+                        <img src="https://w7.pngwing.com/pngs/892/820/png-transparent-circle-content-send-circle-content-icon.png" alt="Отправить" id="sendBtn" />
+
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="right-side">
-            <p>
-                Введите имя группы:<br />
-                <input type="text" id="group" />
-                <input type="button" id="joinBtn" value="Присоединиться к группе" />
-            </p>
-            Добавьте поле для ввода сообщения в группе
-            <p>
-                Введите сообщение в группе:<br />
-                <input type="text" id="groupMessage" />
-                <input type="button" id="sendGroupBtn" value="Отправить в группе" />
-            </p>
+            <div id="right-side">
+                <div id="groupInfo">
+                    <p>
+                        <p>Введите имя группы:</p>
+                        <input type="text" id="group" placeholder="Название группы..."/>
+                        <input type="button" id="joinBtn" value="Присоединиться к группе" />
+                    </p>
 
-            <p>
-                <span id="groupJoinMessage"></span>
-            </p>
+                    <p>
+                        <span id="groupJoinMessage"></span>
+                    </p>
 
-            <p id="currentGroup">Текущая группа: </p>
+                    <p id="currentGroup">Текущая группа: </p>
+                </div>
+            
+                <div id="groupSendMessage">
+                    <p>
+                        <p>Введите сообщение в группе:</p>
+                        <input type="text" id="groupMessage" placeholder="Введите сообщение для группы..."/>
+                        <input type="button" id="sendGroupBtn" value="Отправить в группе" />
+                    </p>
+                </div>
+
+                <div id="ExitContainer">
+                    <p><a href="logout" id="Exit">Выйти</a></p>
+                </div>
+            </div>
         </div>
     </div>
 

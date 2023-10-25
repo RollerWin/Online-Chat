@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Y2gzWXHMY+Dw+ZsmEoHHAixTA1EXikil0eBpj+fBI7k=",
+  "Hash": "n/H45i/LkokpUd0NMxcckeGwtsiiORamM4ewkSQMx+c=",
   "Source": "SignalRMetanit",
   "BasePath": "_content/SignalRMetanit",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\admin.html"
+    },
+    {
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\Images\\arrow.png",
+      "SourceId": "SignalRMetanit",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
+      "BasePath": "_content/SignalRMetanit",
+      "RelativePath": "Images/arrow.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\arrow.png"
     },
     {
       "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\index.html",
@@ -83,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\register.html"
+    },
+    {
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\АНКЕТА.jpg",
+      "SourceId": "SignalRMetanit",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
+      "BasePath": "_content/SignalRMetanit",
+      "RelativePath": "АНКЕТА.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\АНКЕТА.jpg"
     }
   ]
 }
