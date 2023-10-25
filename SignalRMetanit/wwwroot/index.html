@@ -2,15 +2,19 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>METANIT.COM</title>
+    <title>Онлайн-чатик</title>
 
     <style>
         /* Стили для контейнера сообщений */
         #chatroom {
-            width: 500px;
+            width: 90%; /* Ширина будет занимать 90% доступной ширины */
+            max-width: 600px; /* Но не превышать 500px */
             height: 500px;
-            border: 1px solid #ccc; /* Граница для коробки сообщений */
-            overflow: auto; /* Добавляем полосы прокрутки, если содержимое не помещается */
+            border: 1px solid #ccc;
+            border-radius: 15px; /* Закругления для коробки сообщений */
+            overflow: auto;
+            padding: 10px;
+            justify-content:center;
         }
 
         /* Стили для отдельных сообщений */
@@ -19,46 +23,88 @@
             margin: 5px;
             border: 1px solid #ddd;
             background-color: #f9f9f9;
+            border-radius: 5px; /* Закругления для сообщений */
         }
 
         .outgoing-message {
-            background-color: #e0f7fa; /* Цвет исходящих сообщений */
+            background-color: #e0f7fa;
         }
+
+        .input-container {
+            display: flex;
+        }
+
+        .custom-input {
+            flex: 1;
+            border-radius: 15px;
+            height: 50px;
+            max-width: 500px;
+        }
+
+        #sendBtn {
+            margin-left: 10px; /* Добавляем небольшой отступ между вводимым сообщением и кнопкой "Отправить" */
+            width: 50px;
+            height: 50px;
+        }
+
+        #container {
+            width: 100%;
+            max-width: 2000px;
+            margin-left: 350px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            justify-content: center;
+        }
+
+        #left-side {
+            border-right: 1px solid #ccc;
+        }
+
+        #right-side {
+            padding: 10px;
+        }
+
+
     </style>
 </head>
 <body>
     <h2>Личный кабинет пользователя</h2>
     <p><a href="logout">Выйти</a></p>
 
-    <div id="chatroom"></div>
+    <div id="container">
+        <div id="left-side">
+            <div id="chatroom"></div>
+            <div id="messageForm">
+                <div class="input-container">
+                    <input type="text" id="message" placeholder="Введите сообщение..." class="custom-input" />
+                    <!--<input type="button" id="sendBtn" value="Отправить" />-->
+                    <img src="arrow.png" alt="Отправить" id="sendBtn" />
+                </div>
+            </div>
+        </div>
 
-    <div id="messageForm">
-        <p>
-            Введите сообщение:<br />
-            <input type="text" id="message" />
-        </p>
-        <input type="button" id="sendBtn" value="Отправить" />
+        <div id="right-side">
+            <p>
+                Введите имя группы:<br />
+                <input type="text" id="group" />
+                <input type="button" id="joinBtn" value="Присоединиться к группе" />
+            </p>
+            Добавьте поле для ввода сообщения в группе
+            <p>
+                Введите сообщение в группе:<br />
+                <input type="text" id="groupMessage" />
+                <input type="button" id="sendGroupBtn" value="Отправить в группе" />
+            </p>
+
+            <p>
+                <span id="groupJoinMessage"></span>
+            </p>
+
+            <p id="currentGroup">Текущая группа: </p>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-    <!-- Добавьте элемент для ввода имени группы и кнопку для присоединения к группе -->
-    <p>
-        Введите имя группы:<br />
-        <input type="text" id="group" />
-        <input type="button" id="joinBtn" value="Присоединиться к группе" />
-    </p>
-
-    <!-- Добавьте поле для ввода сообщения в группе -->
-    <p>
-        Введите сообщение в группе:<br />
-        <input type="text" id="groupMessage" />
-        <input type="button" id="sendGroupBtn" value="Отправить в группе" />
-    </p>
-
-    <!-- Добавьте элемент для отображения уведомлений о присоединении к группе -->
-    <p>
-        <span id="groupJoinMessage"></span>
-    </p>
 
     <script>
         const hubConnection = new signalR.HubConnectionBuilder()
@@ -107,15 +153,15 @@
 
         // Присоединение к группе по кнопке
         document.getElementById("joinBtn").addEventListener("click", () => {
-        const groupName = document.getElementById("group").value;
-        hubConnection.invoke("JoinGroup", groupName)
-            .then(() => {
-                const groupJoinMessage = document.getElementById("groupJoinMessage");
-                groupJoinMessage.textContent = `Вы присоединились к группе "${groupName}"`;
-                const currentGroup = document.getElementById("currentGroup");
-                currentGroup.textContent = `Текущая группа: "${groupName}"`;
-            })
-            .catch(error => console.error(error));
+            const groupName = document.getElementById("group").value;
+            hubConnection.invoke("JoinGroup", groupName)
+                .then(() => {
+                    const groupJoinMessage = document.getElementById("groupJoinMessage");
+                    groupJoinMessage.textContent = `Вы присоединились к группе "${groupName}"`;
+                    const currentGroup = document.getElementById("currentGroup");
+                    currentGroup.textContent = `Текущая группа: "${groupName}"`;
+                })
+                .catch(error => console.error(error));
         });
 
         hubConnection.on("Receive", (message, userName, timestamp, groupName) => {
@@ -159,6 +205,5 @@
             .catch((err) => console.error(err));
     </script>
 
-    <p id="currentGroup">Текущая группа: </p>
 </body>
 </html>
