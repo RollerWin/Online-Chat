@@ -17,6 +17,8 @@ public partial class OnlineChatContext : DbContext
 
     public virtual DbSet<Message> Messages { get; set; }
 
+    public virtual DbSet<Room> Rooms { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,11 +36,29 @@ public partial class OnlineChatContext : DbContext
             entity.Property(e => e.MessageId).HasColumnName("message_id");
             entity.Property(e => e.MessageSender).HasColumnName("message_sender");
             entity.Property(e => e.MessageTime).HasColumnName("message_time");
+            entity.Property(e => e.RoomId).HasColumnName("room_id");
 
             entity.HasOne(d => d.MessageSenderNavigation).WithMany(p => p.Messages)
                 .HasForeignKey(d => d.MessageSender)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("foreign_key_message_sender");
+
+            entity.HasOne(d => d.Room).WithMany(p => p.Messages)
+                .HasForeignKey(d => d.RoomId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("foreign_key_room_id");
+        });
+
+        modelBuilder.Entity<Room>(entity =>
+        {
+            entity.HasKey(e => e.RoomId).HasName("primary_key_room_id");
+
+            entity.ToTable("rooms");
+
+            entity.Property(e => e.RoomId).HasColumnName("room_id");
+            entity.Property(e => e.RoomName)
+                .HasMaxLength(30)
+                .HasColumnName("room_name");
         });
 
         modelBuilder.Entity<User>(entity =>
