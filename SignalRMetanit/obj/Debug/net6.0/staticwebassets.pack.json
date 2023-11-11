@@ -21,8 +21,12 @@
       "PackagePath": "staticwebassets\\register.html"
     },
     {
-      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\АНКЕТА.jpg",
-      "PackagePath": "staticwebassets\\АНКЕТА.jpg"
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\script.js",
+      "PackagePath": "staticwebassets\\script.js"
+    },
+    {
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\style.css",
+      "PackagePath": "staticwebassets\\style.css"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.SignalRMetanit.Microsoft.AspNetCore.StaticWebAssets.props",

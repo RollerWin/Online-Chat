@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "n/H45i/LkokpUd0NMxcckeGwtsiiORamM4ewkSQMx+c=",
+  "Hash": "rQIyHI+5WRTTIRtR3jow/48rENGRUTNYkydMjCyicMw=",
   "Source": "SignalRMetanit",
   "BasePath": "_content/SignalRMetanit",
   "Mode": "Default",
@@ -102,12 +102,12 @@
       "OriginalItemSpec": "wwwroot\\register.html"
     },
     {
-      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\АНКЕТА.jpg",
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\script.js",
       "SourceId": "SignalRMetanit",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
       "BasePath": "_content/SignalRMetanit",
-      "RelativePath": "АНКЕТА.jpg",
+      "RelativePath": "script.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -116,7 +116,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\АНКЕТА.jpg"
+      "OriginalItemSpec": "wwwroot\\script.js"
+    },
+    {
+      "Identity": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\style.css",
+      "SourceId": "SignalRMetanit",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\",
+      "BasePath": "_content/SignalRMetanit",
+      "RelativePath": "style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\style.css"
     }
   ]
 }

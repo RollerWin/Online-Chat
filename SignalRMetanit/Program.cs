@@ -54,6 +54,12 @@ app.MapPost("/login", async (string? returnUrl, HttpContext context) =>
     var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
     await context.SignInAsync(claimsPrincipal);
+
+    // Добавьте этот отладочный код:
+    var userRole = context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType)?.Value;
+    Console.WriteLine($"User Role: {userRole}");
+
+    await context.SignInAsync(claimsPrincipal);
     return Results.Redirect(returnUrl ?? "/");
 });
 
@@ -67,13 +73,14 @@ app.MapPost("/register", async (string? returnUrl, HttpContext context) =>
         return Results.BadRequest("Имя и/или пароль не установлены");
     string name = form["name"];
     string password = form["password"];
+    string role = "admin";
 
     // Создайте нового пользователя с ролью "user"
     var newUser = new User
     {
         Name = name,
         Password = password,
-        Role = "user"
+        Role = role
     };
 
     var dbContext = context.RequestServices.GetRequiredService<OnlineChatContext>();
@@ -85,10 +92,24 @@ app.MapPost("/register", async (string? returnUrl, HttpContext context) =>
 
 
 app.MapGet("/", [Authorize] async (HttpContext context) =>
-    await SendHtmlAsync(context, "wwwroot/index.html"));
+{
+    var userRole = context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType)?.Value;
+
+    if (userRole == "admin")
+    {
+        await SendHtmlAsync(context, "wwwroot/admin.html");
+        return;
+    }
+    else
+    {
+        await SendHtmlAsync(context, "wwwroot/index.html");
+        return;
+    }
+});
 
 app.MapGet("/admin", [Authorize(Roles = "admin")] async (HttpContext context) =>
     await SendHtmlAsync(context, "wwwroot/admin.html"));
+
 
 app.MapGet("/logout", async (HttpContext context) =>
 {
