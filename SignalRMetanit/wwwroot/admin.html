@@ -2,68 +2,377 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>METANIT.COM</title>
+    <title>Онлайн-чатик</title>
+
+    <style>
+        body {
+            background-color: #4db6ac;
+            font-family: Arial;
+        }
+
+        .incoming-message, .outgoing-message {
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .outgoing-message {
+            background-color: #e0f7fa;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+        .custom-input {
+            width: 50%;
+            flex: 1;
+            border-radius: 15px;
+            height: 50px;
+            border: 1px solid #ccc;
+            max-width: 405px;
+        }
+
+        #sendBtn {
+            margin-left: 10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        #table_container {
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        #container {
+            width: 90%;
+            max-width: 1000px;
+            margin-left: 300px;
+            display: grid;
+            border-radius: 15px;
+            border: 15px solid #fff;
+            grid-template-columns: 1fr 2fr;
+            justify-content: center;
+            background-color: white;
+        }
+
+        #left-side {
+            border-right: 1px solid #ccc;
+            width: 500px;
+        }
+
+        #chatroom {
+            width: 90%;
+            max-width: 650px;
+            height: 500px;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            overflow: auto;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        #right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            padding-bottom: 0px;
+            padding-top: 0px;
+        }
+
+            #right-side > * {
+                margin-bottom: 20px; /* Примерный отступ по вертикали между элементами */
+            }
+
+        #groupInfo {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            background-color: #4db6ac;
+            color: white;
+            max-width: 400px;
+        }
+
+        #userBan {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            padding-top: 2px;
+            background-color: #4db6ac;
+            color: white;
+            max-width: 400px;
+        }
+
+        #group {
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            height: 30px;
+        }
+        
+        #ban {
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            height: 30px;
+        }
+
+        #userRoleContainer {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 5px;
+            background-color: #4db6ac;
+            color: white;
+            max-width: 400px;
+            padding-left: 10px;
+        }
+
+        #joinBtn {
+            background-color: white;
+            border-radius: 15px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        #submitBan {
+            background-color: white;
+            border-radius: 15px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        #groupMessage {
+            border-radius: 15px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        #sendGroupBtn {
+            background-color: white;
+            border-radius: 15px;
+            height: 30px;
+            border: 1px solid #ccc;
+        }
+
+        #groupSendMessage {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 10px;
+            background-color: #4db6ac;
+            color: white;
+            max-width: 400px;
+        }
+
+        #Exit {
+            text-decoration: none;
+            color: white;
+        }
+
+        #ExitContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #4db6ac;
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            height: 40px;
+            width: 60px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h2>Личный кабинет администратора</h2>
-    <p><a href="logout">Выйти</a></p>
-    <div id="userForm">
-        <p>
-            Введите ник:<br />
-            <input id="username" type="text" />
-        </p>
-        <p>
-            Введите сообшение:<br />
-            <input type="text" id="message" />
-        </p>
-        <input type="button" id="sendBtn" value="Отправить" />
+    <h2 align="center" color=white>Online-Chat</h2>
+
+    <div id="table_container">
+        <div id="container">
+            <div id="left-side">
+                <div id="chatroom"></div>
+                <div id="messageForm">
+                    <div class="input-container">
+                        <input type="text" id="message" placeholder="Введите сообщение..." class="custom-input" />
+                        <img src="https://w7.pngwing.com/pngs/892/820/png-transparent-circle-content-send-circle-content-icon.png" alt="Отправить" id="sendBtn" />
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="right-side">
+
+                <div id="userRoleContainer">
+                    <p>Роль пользователя: <span id="userRole"></span></p>
+                </div>
+
+                <div id="userBan">
+                    <p>Введите ник для бана</p>
+                    <input type="text" id="ban" placeholder="Ник пользователя"/>
+                    <input type="button" id="submitBan" value="БАН" onclick="banUser()"/>
+                </div>
+
+                <div id="groupInfo">
+                    <p>
+                    <p>Введите имя группы:</p>
+                    <input type="text" id="group" placeholder="Название группы..." />
+                    <input type="button" id="joinBtn" value="Присоединиться к группе" />
+                    </p>
+
+                    <p>
+                        <span id="groupJoinMessage"></span>
+                    </p>
+
+                    <p id="currentGroup">Текущая группа: </p>
+                </div>
+
+                <div id="groupSendMessage">
+                    <p>
+                    <p>Введите сообщение в группе:</p>
+                    <input type="text" id="groupMessage" placeholder="Введите сообщение для группы..." />
+                    <input type="button" id="sendGroupBtn" value="Отправить в группе" />
+                    </p>
+                </div>
+
+                <div id="ExitContainer">
+                    <p><a href="logout" id="Exit">Выйти</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <br />
-    <div id="adminForm">
-        <input type="text" id="notify" />
-        <input type="button" id="notifyBtn" value="Уведомление" />
-    </div>
-
-    <div id="chatroom"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+
     <script>
         const hubConnection = new signalR.HubConnectionBuilder()
             .withUrl("/chat")
             .build();
 
-        // отправка сообщения от простого пользователя
-        document.getElementById("sendBtn").addEventListener("click", () => {
-            const message = document.getElementById("message").value;
-            const username = document.getElementById("username").value;
-            hubConnection.invoke("Send", message, username)
+        hubConnection.on("UpdateUserRole", (userRole) => {
+            const userRoleContainer = document.getElementById("userRole");
+            userRoleContainer.textContent = userRole;
+        });
+
+        function banUser() {
+            const userName = document.getElementById("ban").value;
+
+            // Вызываем метод на сервере для бана пользователя
+            hubConnection.invoke("BanUser", userName)
+                .then(() => console.log(`${userName} был забанен.`))
+                .catch(error => console.error(`Failed to ban ${userName}: ${error}`));
+        }
+
+        //// В вашем скрипте
+        //hubConnection.on("UserBanned", (bannedUserId) => {
+        //    // Проверяем, является ли текущий пользователь забаненным
+        //    if (hubConnection.connectionId === bannedUserId) {
+        //        // Отключаем пользователя
+        //        hubConnection.stop();
+        //        console.log("Вы были отключены, так как были забанены.");
+
+        //        // Удаляем куки
+        //        document.cookie = "YourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        //        // Вызываем метод для очистки всех данных в вашем приложении
+        //        clearUserData();
+
+        //        // Перенаправляем пользователя на страницу выхода
+        //        window.location.href = "logout";
+        //    }
+        //});
+
+
+        const messageInput = document.getElementById("message");
+        const groupInput = document.getElementById("group");
+        const groupMessageInput = document.getElementById("groupMessage");
+
+        function sendMessage() {
+            const message = messageInput.value;
+            hubConnection.invoke("Send", message)
+                .then(() => {
+                    messageInput.value = '';
+                })
+                .catch(error => console.error(error));
+        }
+
+        function sendGroupMessage() {
+            const groupName = groupInput.value;
+            const message = groupMessageInput.value;
+            hubConnection.invoke("SendGroupMessage", groupName, message)
+                .then(() => {
+                    groupMessageInput.value = '';
+                })
+                .catch(error => console.error(error));
+        }
+
+        messageInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+        groupMessageInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendGroupMessage();
+            }
+        });
+
+        document.getElementById("sendBtn").addEventListener("click", sendMessage);
+        document.getElementById("sendGroupBtn").addEventListener("click", sendGroupMessage);
+
+        document.getElementById("joinBtn").addEventListener("click", () => {
+            const groupName = document.getElementById("group").value;
+            hubConnection.invoke("JoinGroup", groupName)
+                .then(() => {
+                    const groupJoinMessage = document.getElementById("groupJoinMessage");
+                    groupJoinMessage.textContent = `Вы присоединились к группе "${groupName}"`;
+                    const currentGroup = document.getElementById("currentGroup");
+                    currentGroup.textContent = `Текущая группа: "${groupName}"`;
+                })
                 .catch(error => console.error(error));
         });
-        // отправка сообщения от администратора
-        document.getElementById("notifyBtn").addEventListener("click", () => {
-            const message = document.getElementById("notify").value;
-            hubConnection.invoke("Notify", message);
-        });
 
-        // получение сообщения от сервера
-        hubConnection.on("Receive", (message, userName) => {
+        hubConnection.on("Receive", (message, userName, timestamp, groupName) => {
+            const elem = document.createElement("div");
 
-            // создаем элемент <b> для имени пользователя
-            const userNameElem = document.createElement("b");
-            userNameElem.textContent = `${userName}: `;
+            const timestampElem = document.createElement("span");
+            timestampElem.textContent = `${timestamp}`;
 
-            // создает элемент <p> для сообщения пользователя
-            const elem = document.createElement("p");
+            const userNameElem = document.createElement("span");
+            userNameElem.textContent = `${userName} - `;
+
+            const userMessageElem = document.createElement("span");
+            userMessageElem.textContent = message;
+
+            if (groupName) {
+                const groupSpan = document.createElement("span");
+                groupSpan.textContent = `[${groupName}] `;
+                elem.appendChild(groupSpan);
+            }
+
+            const br = document.createElement("br");
+
+            elem.appendChild(timestampElem);
+            elem.appendChild(br);
             elem.appendChild(userNameElem);
-            elem.appendChild(document.createTextNode(message));
+            elem.appendChild(userMessageElem);
 
-            var firstElem = document.getElementById("chatroom").firstChild;
-            document.getElementById("chatroom").insertBefore(elem, firstElem);
+            const chatroom = document.getElementById("chatroom");
+
+            function scrollToBottom() {
+                chatroom.scrollTop = chatroom.scrollHeight;
+            }
+
+            chatroom.appendChild(elem);
+
+            scrollToBottom();
         });
 
         hubConnection.start()
             .then(() => document.getElementById("sendBtn").disabled = false)
             .catch((err) => console.error(err));
     </script>
+
 </body>
 </html>

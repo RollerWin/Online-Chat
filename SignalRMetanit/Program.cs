@@ -73,7 +73,7 @@ app.MapPost("/register", async (string? returnUrl, HttpContext context) =>
         return Results.BadRequest("Имя и/или пароль не установлены");
     string name = form["name"];
     string password = form["password"];
-    string role = "admin";
+    string role = "user";
 
     // Создайте нового пользователя с ролью "user"
     var newUser = new User

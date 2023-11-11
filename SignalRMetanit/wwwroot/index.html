@@ -96,6 +96,16 @@
 
         }
 
+        #userRoleContainer {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 5px;
+            background-color: #4db6ac;
+            color: white;
+            max-width: 400px;
+            padding-left: 10px;
+        }
+
         #group {
             border-radius: 15px;
             border: 1px solid #ccc;
@@ -168,6 +178,11 @@
             </div>
 
             <div id="right-side">
+                
+                <div id="userRoleContainer">
+                    <p>Роль пользователя: <span id="userRole"></span></p>
+                </div>
+
                 <div id="groupInfo">
                     <p>
                         <p>Введите имя группы:</p>
@@ -203,6 +218,31 @@
         const hubConnection = new signalR.HubConnectionBuilder()
             .withUrl("/chat")
             .build();
+
+        //// В вашем скрипте
+        //hubConnection.on("UserBanned", (bannedUserId) => {
+        //    // Проверяем, является ли текущий пользователь забаненным
+        //    if (hubConnection.connectionId === bannedUserId) {
+        //        // Отключаем пользователя
+        //        hubConnection.stop();
+        //        console.log("Вы были отключены, так как были забанены.");
+
+        //        // Удаляем куки
+        //        document.cookie = "YourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        //        // Вызываем метод для очистки всех данных в вашем приложении
+        //        clearUserData();
+
+        //        // Перенаправляем пользователя на страницу выхода
+        //        window.location.href = "logout";
+        //    }
+        //});
+
+
+        hubConnection.on("UpdateUserRole", (userRole) => {
+            const userRoleContainer = document.getElementById("userRole");
+            userRoleContainer.textContent = userRole;
+        });
 
         const messageInput = document.getElementById("message");
         const groupInput = document.getElementById("group");
@@ -244,7 +284,6 @@
         document.getElementById("sendBtn").addEventListener("click", sendMessage);
         document.getElementById("sendGroupBtn").addEventListener("click", sendGroupMessage);
 
-        // Присоединение к группе по кнопке
         document.getElementById("joinBtn").addEventListener("click", () => {
             const groupName = document.getElementById("group").value;
             hubConnection.invoke("JoinGroup", groupName)
