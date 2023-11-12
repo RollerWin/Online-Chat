@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\login.html"
     },
     {
+      "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\logout.html",
+      "PackagePath": "staticwebassets\\logout.html"
+    },
+    {
       "Id": "D:\\Soft\\учёба\\Web\\Online-Chat\\SignalRMetanit\\wwwroot\\register.html",
       "PackagePath": "staticwebassets\\register.html"
     },

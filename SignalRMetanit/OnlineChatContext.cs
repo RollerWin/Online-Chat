@@ -68,6 +68,9 @@ public partial class OnlineChatContext : DbContext
             entity.ToTable("users");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.IsBanned)
+                .HasDefaultValueSql("false")
+                .HasColumnName("is_banned");
             entity.Property(e => e.Name)
                 .HasMaxLength(30)
                 .HasColumnName("name");

@@ -83,7 +83,7 @@
         }
 
         #right-side > * {
-            margin-bottom: 20px; /* Примерный отступ по вертикали между элементами */
+            margin-bottom: 20px;
         }
 
         #groupInfo {
@@ -94,6 +94,16 @@
             color: white;
             max-width: 400px;
 
+        }
+
+        #userRoleContainer {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 5px;
+            background-color: #4db6ac;
+            color: white;
+            max-width: 400px;
+            padding-left: 10px;
         }
 
         #group {
@@ -168,6 +178,11 @@
             </div>
 
             <div id="right-side">
+                
+                <div id="userRoleContainer">
+                    <p>Роль пользователя: <span id="userRole"></span></p>
+                </div>
+
                 <div id="groupInfo">
                     <p>
                         <p>Введите имя группы:</p>
@@ -203,6 +218,11 @@
         const hubConnection = new signalR.HubConnectionBuilder()
             .withUrl("/chat")
             .build();
+
+        hubConnection.on("UpdateUserRole", (userRole) => {
+            const userRoleContainer = document.getElementById("userRole");
+            userRoleContainer.textContent = userRole;
+        });
 
         const messageInput = document.getElementById("message");
         const groupInput = document.getElementById("group");
@@ -244,7 +264,6 @@
         document.getElementById("sendBtn").addEventListener("click", sendMessage);
         document.getElementById("sendGroupBtn").addEventListener("click", sendGroupMessage);
 
-        // Присоединение к группе по кнопке
         document.getElementById("joinBtn").addEventListener("click", () => {
             const groupName = document.getElementById("group").value;
             hubConnection.invoke("JoinGroup", groupName)
