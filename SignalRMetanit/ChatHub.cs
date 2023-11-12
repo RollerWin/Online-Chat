@@ -25,8 +25,18 @@ namespace SignalRApp
         public async Task Send(string message)
         {
             var userName = Context.User.Identity.Name;
-            var timestamp = DateTime.Now.ToString("HH:mm:ss");
-            await Clients.All.SendAsync("Receive", message, userName, timestamp);
+
+            if (IsUserBanned(userName))
+            {
+                // Отправить уведомление о невозможности отправки сообщения
+                await Clients.Caller.SendAsync("Receive", "Вы забанены и не можете отправлять сообщения.", "Администратор");
+                return;
+            }
+            else
+            {
+                var timestamp = DateTime.Now.ToString("HH:mm:ss");
+                await Clients.All.SendAsync("Receive", message, userName, timestamp);
+            }
         }
 
         public async Task JoinGroup(string groupName)
@@ -41,8 +51,18 @@ namespace SignalRApp
         public async Task SendGroupMessage(string groupName, string message)
         {
             var userName = Context.User.Identity.Name;
-            var timestamp = DateTime.Now.ToString("HH:mm:ss");
-            await Clients.Group(groupName).SendAsync("Receive", message, userName, timestamp);
+
+            if (IsUserBanned(userName))
+            {
+                // Отправить уведомление о невозможности отправки сообщения
+                await Clients.Caller.SendAsync("Receive", "Вы забанены и не можете отправлять сообщения в группе.", "Администратор");
+                return;
+            }
+            else
+            {
+                var timestamp = DateTime.Now.ToString("HH:mm:ss");
+                await Clients.Group(groupName).SendAsync("Receive", message, userName, timestamp);
+            }
         }
 
         [Authorize(Roles = "admin")]
@@ -59,13 +79,14 @@ namespace SignalRApp
 
             if (user != null)
             {
-                var bannedUserId = user.Id; // Получаем идентификатор забаненного пользователя
+                user.IsBanned = true;
 
-                _dbContext.Users.Remove(user);
+                _dbContext.Users.Update(user);
                 await _dbContext.SaveChangesAsync();
 
-                // Отправляем сообщение о бане пользователю
-                await Clients.Client(Context.ConnectionId).SendAsync("UserBanned", bannedUserId);
+                var bannedUserId = Context.ConnectionId;
+
+                await Clients.Client(bannedUserId).SendAsync("ForceDisconnect");
 
                 // Отправляем сообщение всем пользователям о бане
                 await Clients.All.SendAsync("Receive", $"{userName} был забанен.", "Администратор");
@@ -75,6 +96,12 @@ namespace SignalRApp
             {
                 await Clients.Caller.SendAsync("Receive", $"Пользователь {userName} не найден.", "Администратор");
             }
+        }
+
+        private bool IsUserBanned(string userName)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Name == userName);
+            return user?.IsBanned ?? false;
         }
 
 

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using SignalRApp; // пространство имен класса ChatHub
+using SignalRApp;
 using Microsoft.EntityFrameworkCore;
 using SignalRMetanit;
 
@@ -22,9 +22,6 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<OnlineChatContext>();
-
-    //var adminRole = context.Users.FirstOrDefault(u => u.Role == "admin");
-    //var userRole = context.Users.FirstOrDefault(u => u.Role == "user");
     var people = context.Users.ToList();
 }
 
@@ -74,13 +71,14 @@ app.MapPost("/register", async (string? returnUrl, HttpContext context) =>
     string name = form["name"];
     string password = form["password"];
     string role = "user";
-
-    // Создайте нового пользователя с ролью "user"
+    bool isBanned = false;
+ 
     var newUser = new User
     {
         Name = name,
         Password = password,
-        Role = role
+        Role = role,
+        IsBanned = isBanned
     };
 
     var dbContext = context.RequestServices.GetRequiredService<OnlineChatContext>();

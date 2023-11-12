@@ -83,7 +83,7 @@
         }
 
         #right-side > * {
-            margin-bottom: 20px; /* Примерный отступ по вертикали между элементами */
+            margin-bottom: 20px;
         }
 
         #groupInfo {
@@ -218,26 +218,6 @@
         const hubConnection = new signalR.HubConnectionBuilder()
             .withUrl("/chat")
             .build();
-
-        //// В вашем скрипте
-        //hubConnection.on("UserBanned", (bannedUserId) => {
-        //    // Проверяем, является ли текущий пользователь забаненным
-        //    if (hubConnection.connectionId === bannedUserId) {
-        //        // Отключаем пользователя
-        //        hubConnection.stop();
-        //        console.log("Вы были отключены, так как были забанены.");
-
-        //        // Удаляем куки
-        //        document.cookie = "YourCookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-        //        // Вызываем метод для очистки всех данных в вашем приложении
-        //        clearUserData();
-
-        //        // Перенаправляем пользователя на страницу выхода
-        //        window.location.href = "logout";
-        //    }
-        //});
-
 
         hubConnection.on("UpdateUserRole", (userRole) => {
             const userRoleContainer = document.getElementById("userRole");
